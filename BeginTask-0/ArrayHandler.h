@@ -17,7 +17,7 @@ public:
         _lenght = 0;
         _array = new T[_size];
         _min = INT8_MAX;
-        _max = 0;
+        _max = 0;//'
     }
 
     void AppendElem(T elem) {
