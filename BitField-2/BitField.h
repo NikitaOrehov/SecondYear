@@ -11,9 +11,13 @@ private:
 public:
     BitField(size_t len);
     BitField(const BitField& tmp);
+    BitField(const BitField&& tmp);
+    BitField& operator=(const BitField&& tmp);
     BitField& operator=(const BitField& tmp);
     
-    size_t GetLength() const; // Получить количество бит
+    size_t GetLength() const{
+        return _sizeBit;
+    } // Получить количество бит
     void SetBit(size_t n);
     void ClrBit(size_t n); // Настя
     uint8_t GetBit(size_t n) const; // Саша
@@ -25,5 +29,7 @@ public:
     bool operator==(const BitField& tmp); // Даша
     BitField operator~(); // Все
 
-    ~BitField(); // Все
+    ~BitField(){
+    }
+        // Все
 };
