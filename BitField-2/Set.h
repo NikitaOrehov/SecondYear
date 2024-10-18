@@ -1,9 +1,7 @@
 #include "BitField.h"
-<<<<<<< HEAD
 #include <cstdint>
-=======
 #include <vector>
->>>>>>> 7f8874c009844ebc863e565e7b636091aadca9a4
+
 
 class Set{
 private:

@@ -1,20 +1,17 @@
 #include "Set.h"
 #include <math.h>
 
-Set::Set(size_t mp) : _bitField(mp){
-    _maxPower = mp;
+Set::Set(size_t mp) : _bitField(mp), _maxPower(mp){
 }
 
-Set::Set(const Set& set) : _bitField(set._bitField){
-    _maxPower = set._maxPower;
+Set::Set(const Set& set) : _bitField(set._bitField), _maxPower(set._maxPower){
 }
 
-Set::Set(const BitField& bf)  : _bitField(bf){
-    _maxPower = bf.GetLength();
+Set::Set(const BitField& bf)  : _bitField(bf), _maxPower(bf.GetLength()){
 }
 
 Set::operator BitField(){
-
+    return _bitField;
 }
 
 void Set::InsertElem(uint64_t elem){
@@ -36,11 +33,11 @@ bool Set::operator==(const Set& tmp){
 Set& Set::operator=(const Set& tmp){
     _maxPower = tmp._maxPower;
     _bitField = tmp._bitField;
+    return *this;
 }
 
 Set Set::operator+(const Set& tmp){
-    Set s = _bitField = tmp._bitField;
-    return s;
+    return _bitField | tmp._bitField;
 }
 
 Set Set::operator+(uint64_t elem){
@@ -64,7 +61,6 @@ Set Set::operator~(){
 std::vector<uint64_t> Set::GetPrimary(){
     BitField f = _bitField;
     std::vector<uint64_t> array;
-    array.push_back(1);
     for (size_t i = 2; i <= sqrt(_maxPower); i++){
         if (f.GetBit(i) != 1) continue;
         array.push_back(i);

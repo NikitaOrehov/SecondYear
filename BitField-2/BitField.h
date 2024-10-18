@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdint>
+#include <cstring>
 
 class BitField {
 private:
