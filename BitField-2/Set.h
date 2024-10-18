@@ -1,5 +1,5 @@
 #include "BitField.h"
-
+#include <cstdint>
 
 class Set{
 private:
