@@ -30,11 +30,8 @@ BitField& BitField::operator=(const BitField& tmp){
 uint16_t BitField::GetMask(size_t n) const {
     return 1 << (n % (8 * sizeof(uint16_t)));
 }
-
-void BitField::SetBit(size_t n) {
-    if (n >= _sizeBit)
-        throw "Bit out of range!";
-    _mem[GetMemIndex(n)] |= GetMask(n);
+BitField BitField::operator^(const BitField& tmp) {
+    return *this;
 }
 
 size_t BitField::GetMemIndex(size_t n) const {
@@ -75,7 +72,7 @@ BitField BitField::operator^(const BitField& tmp){
     return B;
 }
 
-bool BitField::operator==(const BitField& tmp){
+bool BitField::operator==(const BitField& tmp) const{
     if (_sizeBit != tmp._sizeBit){
         return false;
     }

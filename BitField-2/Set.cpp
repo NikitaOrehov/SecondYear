@@ -10,23 +10,19 @@ Set::Set(const Set& set) : _bitField(set._bitField), _maxPower(set._maxPower){
 Set::Set(const BitField& bf)  : _bitField(bf), _maxPower(bf.GetLength()){
 }
 
-Set::operator BitField(){
-    return _bitField;
-}
-
-void Set::InsertElem(uint64_t elem){
+void Set::InsElem(uint64_t elem){
     _bitField.SetBit(elem);
 }
 
-void Set::DeleteElem(uint64_t elem){
+void Set::DelElem(uint64_t elem){
     _bitField.ClrBit(elem);
 }
 
-bool Set::IsMember(uint64_t elem){
+bool Set::IsMember(uint64_t elem) const{
     return _bitField.GetBit(elem);
 }
 
-bool Set::operator==(const Set& tmp){
+bool Set::operator==(const Set& tmp) const{
     return _bitField == tmp._bitField;
 }
 
@@ -42,13 +38,13 @@ Set Set::operator+(const Set& tmp){
 
 Set Set::operator+(uint64_t elem){
     Set s(*this);
-    s.InsertElem(elem);
+    s.InsElem(elem);
     return s;
 }
 
 Set Set::operator-(uint64_t elem){
     Set s(*this);
-    s.DeleteElem(elem);
+    s.DelElem(elem);
     return s;
 }
 Set Set::operator*(const Set& ymp){

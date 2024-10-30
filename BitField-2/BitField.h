@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <cstdint>
 #include <cstring>
@@ -21,15 +22,15 @@ public:
         return _sizeBit;
     } // Получить количество бит
     void SetBit(size_t n);
-    void ClrBit(size_t n); // Настя
-    uint8_t GetBit(size_t n) const; // Саша
+    void ClrBit(size_t n);
+    uint8_t GetBit(size_t n) const;
 
 
-    BitField operator|(const BitField& tmp); // Карина
-    BitField operator&(const BitField& tmp); // Алина
-    BitField operator^(const BitField& tmp); // Арина
-    bool operator==(const BitField& tmp); // Даша
-    BitField operator~(); // Все
+    BitField operator|(const BitField& tmp);
+    BitField operator&(const BitField& tmp);
+    BitField operator^(const BitField& tmp);
+    bool operator==(const BitField& tmp) const;
+    BitField operator~();
 
     ~BitField(){
     }
