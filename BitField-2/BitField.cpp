@@ -1,7 +1,5 @@
 #include "BitField.h"
 
-
-
 BitField::BitField(size_t len = 10) {
     _sizeBit = len;
     _memSize = (len / (8 * sizeof(uint16_t))) + (len % (8 * sizeof(uint16_t)) != 0);
@@ -30,8 +28,9 @@ BitField& BitField::operator=(const BitField& tmp){
 uint16_t BitField::GetMask(size_t n) const {
     return 1 << (n % (8 * sizeof(uint16_t)));
 }
-BitField BitField::operator^(const BitField& tmp) {
-    return *this;
+
+void BitField::SetBit(size_t n){
+    _mem[GetMemIndex(n)] |= GetMask(n);
 }
 
 size_t BitField::GetMemIndex(size_t n) const {
@@ -73,9 +72,6 @@ BitField BitField::operator^(const BitField& tmp){
 }
 
 bool BitField::operator==(const BitField& tmp) const{
-    if (_sizeBit != tmp._sizeBit){
-        return false;
-    }
     for (size_t i = 0; i < _memSize; i++){
         if (_mem[i] != tmp._mem[i]){
             return false;
@@ -86,8 +82,13 @@ bool BitField::operator==(const BitField& tmp) const{
 
 BitField BitField::operator~(){
     BitField cpy = BitField(*this);
-    for (int i = 0; i < _memSize; i++){
-        cpy._mem[i] = ~_mem[i];
+    for (int i = 0; i < _sizeBit; i++){
+        if (GetBit(i)){
+            cpy.ClrBit(i);
+        }
+        else{
+            cpy.SetBit(i);
+        }
     }
     return cpy;
 }
@@ -103,6 +104,7 @@ BitField& BitField::operator=(const BitField&& tmp){
     _sizeBit = tmp._sizeBit;
     _memSize = tmp._memSize;
     _mem = tmp._mem;
+    return *this;
 }
 
 

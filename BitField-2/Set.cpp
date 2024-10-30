@@ -54,6 +54,10 @@ Set Set::operator~(){
     return Set(~_bitField);
 }
 
+bool Set::operator!= (const Set &s) const{
+    return (_bitField == s._bitField) == 0;
+}
+
 std::vector<uint64_t> Set::GetPrimary(){
     BitField f = _bitField;
     std::vector<uint64_t> array;
