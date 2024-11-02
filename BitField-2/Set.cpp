@@ -61,6 +61,7 @@ bool Set::operator!= (const Set &s) const{
 std::vector<uint64_t> Set::GetPrimary(){
     BitField f = _bitField;
     std::vector<uint64_t> array;
+    array.push_back(1);
     for (size_t i = 2; i <= sqrt(_maxPower); i++){
         if (f.GetBit(i) != 1) continue;
         array.push_back(i);
