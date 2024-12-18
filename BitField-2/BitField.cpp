@@ -1,4 +1,5 @@
 #include "BitField.h"
+#include <math.h>
 
 BitField::BitField(size_t len = 10) {
     _sizeBit = len;
@@ -105,6 +106,42 @@ BitField& BitField::operator=(const BitField&& tmp){
     _memSize = tmp._memSize;
     _mem = tmp._mem;
     return *this;
+}
+
+
+void BitField::CodeWord(std::string word){
+    for (int i = 0; i < word.size(); i++){
+        char sum = static_cast<char>(word[i]);
+        int j = i * 8 + 7;
+        while (sum >= 1){
+            if (sum % 2){
+                SetBit(j);
+            }
+            else{
+                ClrBit(j);
+            }
+            sum /= 2;
+            j--;
+        }
+        for (int k = j; k >= i * 8; k--){
+            ClrBit(j);
+        }
+    }
+}
+
+std::string BitField::DecodeWord(){
+    std::string word;
+    size_t size = _sizeBit / 8;
+    for (int i = 0; i < size; i++){
+        char sum = 0;
+        for (int j = i * 8; j < i * 8 + 8; j++){
+            if (GetBit(j)){
+                sum += pow(2, 7 - (j % 8));
+            }
+        }
+        word += sum;
+    }
+    return word;
 }
 
 

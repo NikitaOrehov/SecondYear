@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include <iostream>
 #include <cstdint>
 #include <cstring>
@@ -31,6 +32,26 @@ public:
     BitField operator^(const BitField& tmp);
     bool operator==(const BitField& tmp) const;
     BitField operator~();
+
+    void CodeWord(std::string word);
+    std::string DecodeWord();
+
+    friend std::ostream& operator<<(std::ostream& os, BitField& f){
+        for (int i = 0; i < f.GetLength(); i++){
+            if (i % 8 == 0){
+                std::cout<<" ";
+            }
+            if (f.GetBit(i)){
+                std::cout<<"1";
+            }
+            else{
+                std::cout<<"0";
+            }
+        }
+        std::cout<<"\n";
+        return os;
+    } 
+
 
     ~BitField(){
     }
